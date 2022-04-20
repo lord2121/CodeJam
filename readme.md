@@ -1,1 +1,1 @@
-ghd*This is a project made for CodeJam challenge
+*This is a project made for CodeJam challenge
