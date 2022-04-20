@@ -17,7 +17,21 @@ app.get("/",(req,res)=>{
     res.render("index")
 })
 
-app.use('/product' , productRoutes);
+
+
+app.get("/product/all",(req,res)=>{
+    res.render('../views/product/products')
+})
+
+app.get("/product/:id",(req,res)=>{
+    res.render('../views/product/product.ejs')
+})
+
+app.get("/product/post",(req,res)=>{
+    res.render("../views/product/productForm.ejs");
+})
+
+
 
 
 app.use('*' , (req , res) => {
