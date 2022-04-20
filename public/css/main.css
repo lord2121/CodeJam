@@ -1,8 +1,21 @@
-.products-container {
-    overflow-y: scroll;
+.app {
+    height: 100vh;
 }
 
-.d-flex>.card {
-    min-width: 400px;
-    margin-right: 100px;
+.products-container {
+    width: 100vw;
+    display: flex;
+    overflow-x: scroll;
+}
+
+.products-container>.card {
+    display: inline-block;
+    min-width: 300px;
+    margin: 50px;
+}
+
+@media only screen and (max-width: 600px) {
+    .products-container {
+        flex-direction: column;
+    }
 }
