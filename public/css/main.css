@@ -1,0 +1,8 @@
+.products-container {
+    overflow-y: scroll;
+}
+
+.d-flex>.card {
+    min-width: 400px;
+    margin-right: 100px;
+}
