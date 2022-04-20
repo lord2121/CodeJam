@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-mongoose.connect('mongodb://localhost:27017/CodeJam')
+mongoose.connect('mongodb://localhost:27017/Products')
 
 const ProductSchema = new Schema({
     image:String,
@@ -11,6 +11,3 @@ const ProductSchema = new Schema({
 
 const Product = mongoose.model('Product',ProductSchema);
 
-const apple = new Product({image: "dqwhdbq"});
-
-console.log(apple.image);
