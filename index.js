@@ -84,11 +84,11 @@ app.get("/", (req, res) => {
 
 
 app.get("/product/all", (req, res) => {
-  res.render('../views/product/products')
+  res.render('../views/product/products');
 })
 
 app.get("/product/:id", (req, res) => {
-  res.render('../views/product/product.ejs')
+  res.render('../views/product/product.ejs');
 })
 
 app.get("/product/post", (req, res) => {
@@ -96,9 +96,9 @@ app.get("/product/post", (req, res) => {
 })
 
 app.use('*', (req, res) => {
-  res.send("404 not found")
+  res.render("../views/404.ejs");
 })
 
 app.listen(PORT, () => {
-  console.log("Listening on PORT 3000")
+  console.log(`Listening on PORT ${PORT}...`)
 })
