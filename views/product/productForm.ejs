@@ -1,1 +1,22 @@
 <%layout('partials/boilerplate')-%>
+<form class="container my-5 w-xl-50">
+    <h1 class="text-center">Add a new Product</h1>
+    <div class="mb-3">
+        <input type="text" class="form-control" name="product[title]" placeholder="Product Title">
+    </div>
+    <div class="mb-3">
+        <textarea class="form-control" rows="3" name="product[description]"
+            placeholder="Product description"></textarea>
+    </div>
+    <div class="mb-3 form-check">
+        <section>
+            <label for="instagramCheckbox">Post on Instagram</label>
+            <input type="checkbox" id="instagramCheckbox" name="product[instagram]" class="form-check-input">
+        </section>
+        <section>
+            <label for="facebookCheckbox">Post on Facebook</label>
+            <input type="checkbox" id="facebookCheckbox" name="product[facebook]" class="form-check-input">
+        </section>
+    </div>
+    <button type="submit" class="btn btn-dark float-end">Make post</button>
+</form>

@@ -87,13 +87,15 @@ app.get("/product/all", (req, res) => {
   res.render('../views/product/products');
 })
 
+app.get("/product/post", (req, res) => {
+  res.render("../views/product/productForm.ejs");
+})
+
 app.get("/product/:id", (req, res) => {
   res.render('../views/product/product.ejs');
 })
 
-app.get("/product/post", (req, res) => {
-  res.render("../views/product/productForm.ejs");
-})
+
 
 app.use('*', (req, res) => {
   res.render("../views/404.ejs");

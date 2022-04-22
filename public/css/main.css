@@ -1,21 +1,135 @@
-.app {
-    height: 100vh;
-}
-
-.products-container {
-    width: 100vw;
+.navMenuButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
     display: flex;
-    overflow-x: scroll;
+    padding: 0;
 }
 
-.products-container>.card {
-    display: inline-block;
-    min-width: 300px;
-    margin: 50px;
+.navLine {
+    fill: none;
+    stroke: black;
+    stroke-width: 6;
+    transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+        stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@media only screen and (max-width: 600px) {
-    .products-container {
-        flex-direction: column;
-    }
+.navLine1 {
+    stroke-dasharray: 60 207;
+    stroke-width: 6;
+}
+
+.navLine2 {
+    stroke-dasharray: 60 60;
+    stroke-width: 6;
+}
+
+.navLine3 {
+    stroke-dasharray: 60 207;
+    stroke-width: 6;
+}
+
+.opened .navLine1 {
+    stroke-dasharray: 90 207;
+    stroke-dashoffset: -134;
+    stroke-width: 6;
+}
+
+.opened .navLine2 {
+    stroke-dasharray: 1 60;
+    stroke-dashoffset: -30;
+    stroke-width: 6;
+}
+
+.opened .navLine3 {
+    stroke-dasharray: 90 207;
+    stroke-dashoffset: -134;
+    stroke-width: 6;
+}
+
+.navButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 102;
+}
+
+.navMenu {
+    width: 100vw;
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+    z-index: 100;
+}
+
+#app {
+    width: 100vw;
+    height: 100vh;
+    overflow: scroll;
+}
+
+.navLink {
+    display: block;
+    position: relative;
+    padding: 0.2em 0;
+}
+
+.navLink a {
+    font-weight: bold;
+    color: black;
+    font-size: 5rem;
+    text-decoration: none;
+}
+
+.navLink::after,
+input::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.5em;
+    background-color: black;
+    opacity: 0;
+    transition: transform 0.5s;
+}
+
+.navLink {
+    overflow: hidden;
+}
+
+.navLink::after {
+    opacity: 1;
+    transform: translate3d(-100%, 0, 0);
+}
+
+.navLink:hover::after,
+.navLink:focus::after {
+    transform: translate3d(0, 0, 0);
+}
+
+input {
+    border: none;
+    border-bottom: 0.1rem solid #eeeeee;
+    position: relative;
+    display: block;
+}
+
+input:hover::after,
+input:focus::after {
+    transform: translate3d(0, 0, 0);
+}
+
+input:focus {
+    outline: none;
+}
+
+h1 {
+    font-weight: bold;
+    color: black;
+    font-size: 5rem;
 }

@@ -15,6 +15,7 @@
     "ejs-mate": "^3.0.0",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
+    "lax.js": "^2.0.3",
     "locomotive-scroll": "^4.1.4",
     "mongoose": "^6.3.0",
     "mongoose-findorcreate": "^3.0.0",
