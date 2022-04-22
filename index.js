@@ -12,12 +12,16 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const Schema = mongoose.Schema;
 const findOrCreate = require('mongoose-findorcreate');
 const passportLocalMongoose = require("passport-local-mongoose");
+const bodyParser = require("body-parser");
+const Product = require("./models/productModel")
 
 
 const app = express()
 app.engine('ejs', ejsMate);
 app.set("view engine", "ejs")
 app.use(express.static("public"))
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
 
 
 app.use(session({
@@ -29,7 +33,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// mongoose.connect('mongodb://localhost:27017/UserDB')
 
 const userSchema = new Schema({
   email: String,
@@ -37,8 +40,11 @@ const userSchema = new Schema({
   facebookId: String
 });
 
+
+
 userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
+
 
 const User = mongoose.model('User', userSchema);
 
@@ -84,7 +90,9 @@ app.get("/", (req, res) => {
 
 
 app.get("/product/all", (req, res) => {
-  res.render('../views/product/products');
+  Product.find({},function(err,foundItems){
+    res.render('../views/product/products',{newProductItem: foundItems});
+  })
 })
 
 app.get("/product/post", (req, res) => {
@@ -95,11 +103,25 @@ app.get("/product/:id", (req, res) => {
   res.render('../views/product/product.ejs');
 })
 
+app.post("/",(req,res)=> {
+  const productTitle = req.body.newTitle
+  const productImage = req.body.newImage
+  const productDescription = req.body.newDescription
+  const newProduct = new Product({
+    image: productImage,
+    title: productTitle,
+    description: productDescription
+  })
+  newProduct.save()
+  res.redirect("/")
 
+})
 
 app.use('*', (req, res) => {
   res.render("../views/404.ejs");
 })
+
+
 
 app.listen(PORT, () => {
   console.log(`Listening on PORT ${PORT}...`)
