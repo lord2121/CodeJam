@@ -14,8 +14,10 @@ const findOrCreate = require('mongoose-findorcreate');
 const passportLocalMongoose = require("passport-local-mongoose");
 const bodyParser = require("body-parser");
 const Product = require("./models/productModel")
+const FB = require("fb")
 
 
+FB.setAccessToken('EAAQD35p2XE0BAGZA2jcMuj1158jJzhF7ZBTrp94B7fKiMjOOePOZAVKgs7CQPMxSttjF4yQMNor7SeZB3iiZCf5DZC22QWfGKI7ljmS4VxNiZBTAnd31Lor5Vog9WgJgLqiyKF5ahQVcOs4DuUzH9HAI4R11ByCKDOTSD2MHZBIZAgNZADLPtvRdHsqHcbKdKpIjRi5DaJ2v8t7QZDZD');
 const app = express()
 app.engine('ejs', ejsMate);
 app.set("view engine", "ejs")
@@ -104,15 +106,27 @@ app.get("/product/:id", (req, res) => {
 })
 
 app.post("/",(req,res)=> {
-  const productTitle = req.body.newTitle
-  const productImage = req.body.newImage
-  const productDescription = req.body.newDescription
-  const newProduct = new Product({
-    image: productImage,
-    title: productTitle,
-    description: productDescription
-  })
-  newProduct.save()
+  // const productTitle = req.body.newTitle
+  // const productImage = req.body.newImage
+   const productDescription = req.body.newDescription
+  // const newProduct = new Product({
+  //   image: productImage,
+  //   title: productTitle,
+  //   description: productDescription
+  // })
+  // newProduct.save()
+
+  FB.api(
+    '/4989596207793558/feed',
+    'POST',
+    {"message":productDescription},
+    function(res) {
+      if(!res || res.error) {
+        console.log(!res ? 'error occurred' : res.error);
+        return;}
+    }
+  );
+
   res.redirect("/")
 
 })
