@@ -13,7 +13,6 @@ const Schema = mongoose.Schema;
 const findOrCreate = require('mongoose-findorcreate');
 const passportLocalMongoose = require("passport-local-mongoose");
 const bodyParser = require("body-parser");
-const Product = require("./models/productModel")
 const FB = require("fb")
 
 
@@ -22,7 +21,7 @@ const app = express()
 app.engine('ejs', ejsMate);
 app.set("view engine", "ejs")
 app.use(express.static("public"))
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 
@@ -92,8 +91,8 @@ app.get("/", (req, res) => {
 
 
 app.get("/product/all", (req, res) => {
-  Product.find({},function(err,foundItems){
-    res.render('../views/product/products',{newProductItem: foundItems});
+  productModel.find({}, function (err, foundItems) {
+    res.render('../views/product/products', { newProductItem: foundItems });
   })
 })
 
@@ -102,30 +101,34 @@ app.get("/product/post", (req, res) => {
 })
 
 app.get("/product/:id", (req, res) => {
-  res.render('../views/product/product.ejs');
+  id = req.params.id;
+  productModel.findById(id, function (err, product) {
+    res.render('../views/product/product', { product });
+  })
 })
 
-app.post("/",(req,res)=> {
-  // const productTitle = req.body.newTitle
-  // const productImage = req.body.newImage
-   const productDescription = req.body.newDescription
-  // const newProduct = new Product({
-  //   image: productImage,
-  //   title: productTitle,
-  //   description: productDescription
-  // })
-  // newProduct.save()
+app.post("/", (req, res) => {
+  const productTitle = req.body.newTitle
+  const productImage = req.body.newImage
+  const productDescription = req.body.newDescription
+  const newProduct = new productModel({
+    image: productImage,
+    title: productTitle,
+    description: productDescription
+  })
+  newProduct.save()
 
-  FB.api(
-    '/4989596207793558/feed',
-    'POST',
-    {"message":productDescription},
-    function(res) {
-      if(!res || res.error) {
-        console.log(!res ? 'error occurred' : res.error);
-        return;}
-    }
-  );
+  // FB.api(
+  //   '/4989596207793558/feed',
+  //   'POST',
+  //   { "message": productDescription },
+  //   function (res) {
+  //     if (!res || res.error) {
+  //       console.log(!res ? 'error occurred' : res.error);
+  //       return;
+  //     }
+  //   }
+  // );
 
   res.redirect("/")
 
