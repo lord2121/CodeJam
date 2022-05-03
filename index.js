@@ -16,7 +16,7 @@ const bodyParser = require("body-parser");
 const FB = require("fb")
 
 
-FB.setAccessToken('EAAQD35p2XE0BAPS4E4IW9BrK3OL1mga4Tm7ftQTIlHcIwxng2ppJbZAtkrBSAbowifjckLtZByOuyBwD2QFEtLp2ZBIgrPns3lwIRDWQEa8C7ZBBXYXjmJxToVZAVMZCzRsV15i17UdG9ZBuiknWGtz53Nt3qxqOOTYbdZBswNjVozIYT9UGxfR2');
+FB.setAccessToken('EAAQD35p2XE0BAGZA2jcMuj1158jJzhF7ZBTrp94B7fKiMjOOePOZAVKgs7CQPMxSttjF4yQMNor7SeZB3iiZCf5DZC22QWfGKI7ljmS4VxNiZBTAnd31Lor5Vog9WgJgLqiyKF5ahQVcOs4DuUzH9HAI4R11ByCKDOTSD2MHZBIZAgNZADLPtvRdHsqHcbKdKpIjRi5DaJ2v8t7QZDZD');
 const app = express()
 app.engine('ejs', ejsMate);
 app.set("view engine", "ejs")
