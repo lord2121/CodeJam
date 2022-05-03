@@ -22,7 +22,7 @@ const app = express()
 app.engine('ejs', ejsMate);
 app.set("view engine", "ejs")
 app.use(express.static("public"))
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 
@@ -92,8 +92,8 @@ app.get("/", (req, res) => {
 
 
 app.get("/product/all", (req, res) => {
-  Product.find({},function(err,foundItems){
-    res.render('../views/product/products',{newProductItem: foundItems});
+  Product.find({}, function (err, foundItems) {
+    res.render('../views/product/products', { newProductItem: foundItems });
   })
 })
 
@@ -105,45 +105,26 @@ app.get("/product/:id", (req, res) => {
   res.render('../views/product/product.ejs');
 })
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 app.post("/", (req, res) => {
-  const productTitle = req.body.newTitle
-  const productImage = req.body.newImage
-  const productDescription = req.body.newDescription
-  const newProduct = new productModel({
-    image: productImage,
-    title: productTitle,
-    description: productDescription
-  })
-  console.log(newProduct);
-  newProduct.save()
-=======
-=======
->>>>>>> parent of f6796a9 (Add product show)
-app.post("/",(req,res)=> {
   // const productTitle = req.body.newTitle
   // const productImage = req.body.newImage
-   const productDescription = req.body.newDescription
+  const productDescription = req.body.newDescription
   // const newProduct = new Product({
   //   image: productImage,
   //   title: productTitle,
   //   description: productDescription
   // })
   // newProduct.save()
-<<<<<<< HEAD
->>>>>>> parent of f6796a9 (Add product show)
-=======
->>>>>>> parent of f6796a9 (Add product show)
 
   FB.api(
     '/4989596207793558/feed',
     'POST',
-    {"message":productDescription},
-    function(res) {
-      if(!res || res.error) {
+    { "message": productDescription },
+    function (res) {
+      if (!res || res.error) {
         console.log(!res ? 'error occurred' : res.error);
-        return;}
+        return;
+      }
     }
   );
 
