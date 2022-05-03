@@ -116,6 +116,7 @@ app.post("/", (req, res) => {
     title: productTitle,
     description: productDescription
   })
+  console.log(newProduct);
   newProduct.save()
 
   // FB.api(
