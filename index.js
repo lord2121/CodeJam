@@ -16,7 +16,7 @@ const bodyParser = require("body-parser");
 const FB = require("fb")
 
 
-FB.setAccessToken('EAAQD35p2XE0BAGZA2jcMuj1158jJzhF7ZBTrp94B7fKiMjOOePOZAVKgs7CQPMxSttjF4yQMNor7SeZB3iiZCf5DZC22QWfGKI7ljmS4VxNiZBTAnd31Lor5Vog9WgJgLqiyKF5ahQVcOs4DuUzH9HAI4R11ByCKDOTSD2MHZBIZAgNZADLPtvRdHsqHcbKdKpIjRi5DaJ2v8t7QZDZD');
+FB.setAccessToken('EAAQD35p2XE0BAGTaH0oPJYxjCG1ijEaUXZCUCk7rCcGgycbEX9uxZBCgMpXfkqgGGhr7s4jZBJu3GSqS63KXupseLrj6bBm82dZCwpy11FTT2JjneA78lmc3lodi629VZAavkfZAHUMczIDg48G7rNFUgM2aaFfTZBBZCMmpOR7uKsGpPF79tGUE4FTUDSNZBMFR5ZAJVxlGx0CsgrOP6h15BrH0GxsTZCQVzHfSrFXorrXhvXWZBxyi2hkV');
 const app = express()
 app.engine('ejs', ejsMate);
 app.set("view engine", "ejs")
@@ -119,17 +119,17 @@ app.post("/", (req, res) => {
   console.log(newProduct);
   newProduct.save()
 
-  // FB.api(
-  //   '/4989596207793558/feed',
-  //   'POST',
-  //   { "message": productDescription },
-  //   function (res) {
-  //     if (!res || res.error) {
-  //       console.log(!res ? 'error occurred' : res.error);
-  //       return;
-  //     }
-  //   }
-  // );
+  FB.api(
+    '/4989596207793558/feed',
+    'POST',
+    { "message": "parfum de cocalar" },
+    function (res) {
+      if (!res || res.error) {
+        console.log(!res ? 'error occurred' : res.error);
+        return;
+      }
+    }
+  );
 
   res.redirect("/")
 
