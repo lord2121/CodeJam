@@ -106,6 +106,7 @@ app.get("/product/:id", (req, res) => {
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 app.post("/", (req, res) => {
   const productTitle = req.body.newTitle
   const productImage = req.body.newImage
@@ -118,6 +119,8 @@ app.post("/", (req, res) => {
   console.log(newProduct);
   newProduct.save()
 =======
+=======
+>>>>>>> parent of f6796a9 (Add product show)
 app.post("/",(req,res)=> {
   // const productTitle = req.body.newTitle
   // const productImage = req.body.newImage
@@ -128,6 +131,9 @@ app.post("/",(req,res)=> {
   //   description: productDescription
   // })
   // newProduct.save()
+<<<<<<< HEAD
+>>>>>>> parent of f6796a9 (Add product show)
+=======
 >>>>>>> parent of f6796a9 (Add product show)
 
   FB.api(
