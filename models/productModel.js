@@ -11,8 +11,6 @@ const productSchema = new Schema({
   description: String
 });
 
-productSchema.plugin(passportLocalMongoose);
-productSchema.plugin(findOrCreate);
 const Product = mongoose.model('Product', productSchema);
 
 
