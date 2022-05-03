@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose")
 const findOrCreate = require('mongoose-findorcreate');
 
-mongoose.connect('mongodb://localhost:27017/Products')
+mongoose.connect('mongodb://localhost:27017/Test')
 
 const productSchema = new Schema({
   image: String,
@@ -11,8 +11,6 @@ const productSchema = new Schema({
   description: String
 });
 
-productSchema.plugin(passportLocalMongoose);
-productSchema.plugin(findOrCreate);
 const Product = mongoose.model('Product', productSchema);
 
 
