@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose")
 const findOrCreate = require('mongoose-findorcreate');
 
-mongoose.connect('mongodb://localhost:27017/CodeJam')
+mongoose.connect('mongodb://localhost:27017/Users')
 
 const userSchema = new Schema({
   facebookId: String

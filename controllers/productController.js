@@ -1,6 +1,7 @@
 const productModel = require('../models/productModel.js');
 
 module.exports.getProduct = (req, res) => {
+    console.log("Sall")
     res.render('../views/product/product.ejs')
 }
 

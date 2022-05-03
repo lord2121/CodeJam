@@ -1,17 +1,17 @@
 <%layout('partials/boilerplate')-%>
 
 <div class="products-container">
-    <% newProductItem.forEach(function(item){ %>
-    <div class="card">
-        <img class="card-img-top" alt="..." src=<%= item.image %>>
-        <div class="card-body">
-            <h5 class="card-title"> <%= item.title %> </h5>
-            <p class="card-text"><%= item.description %></p>
-            <a href="/product/<%= item._id %>" class="btn btn-primary">Go to product show page</a>
+   <% newProductItem.forEach(function(item){ %>
+        <div class="card">
+            <img class="card-img-top" alt="..."  src = <%= item.image %>>
+            <div class="card-body">
+                <h5 class="card-title"> <%= item.title %> </h5>
+                <p class="card-text"><%= item.description %></p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
         </div>
-    </div>
 
-    <% }) %>
+   <% }) %>
     <div class="card">
         <img src="https://st.depositphotos.com/1408467/3650/v/950/depositphotos_36507573-stock-illustration-perfume-bottle.jpg"
             class="card-img-top" alt="...">

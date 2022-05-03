@@ -13,6 +13,7 @@ const Schema = mongoose.Schema;
 const findOrCreate = require('mongoose-findorcreate');
 const passportLocalMongoose = require("passport-local-mongoose");
 const bodyParser = require("body-parser");
+const Product = require("./models/productModel")
 const FB = require("fb")
 
 
@@ -91,7 +92,7 @@ app.get("/", (req, res) => {
 
 
 app.get("/product/all", (req, res) => {
-  productModel.find({}, function (err, foundItems) {
+  Product.find({}, function (err, foundItems) {
     res.render('../views/product/products', { newProductItem: foundItems });
   })
 })
@@ -101,35 +102,31 @@ app.get("/product/post", (req, res) => {
 })
 
 app.get("/product/:id", (req, res) => {
-  id = req.params.id;
-  productModel.findById(id, function (err, product) {
-    res.render('../views/product/product', { product });
-  })
+  res.render('../views/product/product.ejs');
 })
 
 app.post("/", (req, res) => {
-  const productTitle = req.body.newTitle
-  const productImage = req.body.newImage
+  // const productTitle = req.body.newTitle
+  // const productImage = req.body.newImage
   const productDescription = req.body.newDescription
-  const newProduct = new productModel({
-    image: productImage,
-    title: productTitle,
-    description: productDescription
-  })
-  console.log(newProduct);
-  newProduct.save()
+  // const newProduct = new Product({
+  //   image: productImage,
+  //   title: productTitle,
+  //   description: productDescription
+  // })
+  // newProduct.save()
 
-  // FB.api(
-  //   '/4989596207793558/feed',
-  //   'POST',
-  //   { "message": productDescription },
-  //   function (res) {
-  //     if (!res || res.error) {
-  //       console.log(!res ? 'error occurred' : res.error);
-  //       return;
-  //     }
-  //   }
-  // );
+  FB.api(
+    '/4989596207793558/feed',
+    'POST',
+    { "message": productDescription },
+    function (res) {
+      if (!res || res.error) {
+        console.log(!res ? 'error occurred' : res.error);
+        return;
+      }
+    }
+  );
 
   res.redirect("/")
 
