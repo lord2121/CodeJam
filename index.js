@@ -14,6 +14,7 @@ const findOrCreate = require('mongoose-findorcreate');
 const passportLocalMongoose = require("passport-local-mongoose");
 const bodyParser = require("body-parser");
 const FB = require("fb")
+const methodOverride = require('method-override');
 
 
 FB.setAccessToken('EAAQD35p2XE0BAGTaH0oPJYxjCG1ijEaUXZCUCk7rCcGgycbEX9uxZBCgMpXfkqgGGhr7s4jZBJu3GSqS63KXupseLrj6bBm82dZCwpy11FTT2JjneA78lmc3lodi629VZAavkfZAHUMczIDg48G7rNFUgM2aaFfTZBBZCMmpOR7uKsGpPF79tGUE4FTUDSNZBMFR5ZAJVxlGx0CsgrOP6h15BrH0GxsTZCQVzHfSrFXorrXhvXWZBxyi2hkV');
@@ -33,7 +34,7 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(methodOverride('_method'));
 
 const userSchema = new Schema({
   email: String,
@@ -100,14 +101,7 @@ app.get("/product/post", (req, res) => {
   res.render("../views/product/productForm.ejs");
 })
 
-app.get("/product/:id", (req, res) => {
-  id = req.params.id;
-  productModel.findById(id, function (err, product) {
-    res.render('../views/product/product', { product });
-  })
-})
-
-app.post("/", (req, res) => {
+app.post("/product/post", (req, res) => {
   const productTitle = req.body.newTitle
   const productImage = req.body.newImage
   const productDescription = req.body.newDescription
@@ -131,8 +125,21 @@ app.post("/", (req, res) => {
     }
   );
 
-  res.redirect("/")
+  res.redirect("/product/all")
+})
 
+app.get("/product/:id", (req, res) => {
+  id = req.params.id;
+  productModel.findById(id, function (err, product) {
+    res.render('../views/product/product', { product });
+  })
+})
+
+app.delete("/product/:id", async (req, res) => {
+  id = req.params.id;
+  console.log(id)
+  await productModel.deleteOne({ _id: id });
+  res.redirect("/product/all");
 })
 
 app.use('*', (req, res) => {

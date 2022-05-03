@@ -6,6 +6,10 @@
     padding: 0;
 }
 
+.buttonSvg {
+    width: 50px;
+}
+
 .navLine {
     fill: none;
     stroke: black;
@@ -81,7 +85,7 @@
 .navLink a {
     font-weight: bold;
     color: black;
-    font-size: 5rem;
+    font-size: 3rem;
     text-decoration: none;
 }
 
@@ -139,4 +143,50 @@ h1 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.products-container {
+    width: 100vw;
+}
+
+@media only screen and (min-width: 768px) {
+    .products-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 70vh;
+        width: 80vw;
+    }
+
+    .buttonSvg {
+        width: 100px;
+    }
+}
+
+.card-link {
+    text-decoration: none;
+    color: #ccc;
+    transition: 0.3s color;
+}
+
+.card-link:hover {
+    color: white;
+}
+
+.card-title {
+    font-size: 2rem;
+}
+
+.card {
+    background: #333;
+    border-radius: 0;
+}
+
+.deleteButton {
+    background: grey;
+    position: absolute;
+    top: 0;
+    right: 0;
+
 }

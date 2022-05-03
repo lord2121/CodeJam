@@ -1,85 +1,33 @@
 <%layout('partials/boilerplate')-%>
 
-<div class="products-container">
-    <% newProductItem.forEach(function(item){ %>
-    <div class="card">
-        <img class="card-img-top" alt="..." src=<%= item.image %>>
-        <div class="card-body">
-            <h5 class="card-title"> <%= item.title %> </h5>
-            <p class="card-text"><%= item.description %></p>
-            <a href="/product/<%= item._id %>" class="btn btn-primary">Go to product show page</a>
+<div class="products-container swiper">
+    <div class="swiper-wrapper" style="width: 100%;height:100%;">
+        <% newProductItem.forEach(function(item){ %>
+        <div class="card swiper-slide">
+            <a href="/product/<%= item._id %>" class="card-link">
+                <img class="card-img-top" src=<%= item.image %>>
+                <div class="card-body">
+                    <h5 class="card-title"> <%= item.title %> </h5>
+                    <p class="card-text"><%= item.description %></p>
+                </div>
+            </a>
+            <%if(currentUser){%>
+            <form method="POST" action="/product/<%= item._id %>?_method=DELETE">
+                <button class="deleteButton">Delete</button>
+            </form>
+            <%}%>
         </div>
-    </div>
-
-    <% }) %>
-    <div class="card">
-        <img src="https://st.depositphotos.com/1408467/3650/v/950/depositphotos_36507573-stock-illustration-perfume-bottle.jpg"
-            class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            
+        <% }) %>
+            <%if(currentUser){%>
+            <div class="card swiper-slide">
+                <a href="/product/post" class="card-link">
+                    <div class="card-body">
+                        <h5 class="card-title"> Add new Product </h5>
+                    </div>
+                </a>
+            </div>
+            <%}%>
         </div>
+        
     </div>
-    <div class="card">
-        <img src="https://st.depositphotos.com/1408467/3650/v/950/depositphotos_36507573-stock-illustration-perfume-bottle.jpg"
-            class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-    </div>
-    <div class="card lax_preset_fadeInOut:100:0">
-        <img src="https://st.depositphotos.com/1408467/3650/v/950/depositphotos_36507573-stock-illustration-perfume-bottle.jpg"
-            class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-    </div>
-    <div class="card">
-        <img src="https://st.depositphotos.com/1408467/3650/v/950/depositphotos_36507573-stock-illustration-perfume-bottle.jpg"
-            class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-    </div>
-    <div class="card">
-        <img src="https://st.depositphotos.com/1408467/3650/v/950/depositphotos_36507573-stock-illustration-perfume-bottle.jpg"
-            class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-    </div>
-    <div class="card">
-        <img src="https://st.depositphotos.com/1408467/3650/v/950/depositphotos_36507573-stock-illustration-perfume-bottle.jpg"
-            class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-    </div>
-    <div class="card">
-        <img src="https://st.depositphotos.com/1408467/3650/v/950/depositphotos_36507573-stock-illustration-perfume-bottle.jpg"
-            class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-    </div>
-</div>
