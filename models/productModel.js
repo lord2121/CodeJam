@@ -6,9 +6,18 @@ const findOrCreate = require('mongoose-findorcreate');
 mongoose.connect('mongodb://localhost:27017/Test')
 
 const productSchema = new Schema({
-  image: String,
-  title: String,
-  description: String
+  image: {
+    type: String,
+    required: true
+  },
+  title: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  }
 });
 
 const Product = mongoose.model('Product', productSchema);
