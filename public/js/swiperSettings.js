@@ -21,4 +21,9 @@ function swiperSettings() {
     }
 }
 
+function swiperSwitch(className) {
+    if (windowWidth >= 992) return className;
+    else return "";
+}
+
 const swiper = new Swiper('.swiper', swiperSettings());

@@ -91,10 +91,9 @@ app.get("/", (req, res) => {
 
 
 
-app.get("/product/all", (req, res) => {
-  productModel.find({}, function (err, foundItems) {
-    res.render('../views/product/products', { newProductItem: foundItems });
-  })
+app.get("/product/all", async (req, res) => {
+  const foundItems = await productModel.find({}).sort({ _id: -1 });
+  res.render('../views/product/products', { newProductItem: foundItems });
 })
 
 app.get("/product/post", (req, res) => {
