@@ -101,7 +101,7 @@ app.get("/product/post", (req, res) => {
   res.render("../views/product/productForm.ejs");
 })
 
-app.post("/product/post", (req, res) => {
+app.post("/product/post", async (req, res) => {
   const productTitle = req.body.newTitle
   const productImage = req.body.newImage
   const productDescription = req.body.newDescription
@@ -110,8 +110,7 @@ app.post("/product/post", (req, res) => {
     title: productTitle,
     description: productDescription
   })
-  console.log(newProduct);
-  newProduct.save()
+  await newProduct.save()
 
   FB.api(
     '/4989596207793558/feed',
@@ -137,7 +136,6 @@ app.get("/product/:id", (req, res) => {
 
 app.delete("/product/:id", async (req, res) => {
   id = req.params.id;
-  console.log(id)
   await productModel.deleteOne({ _id: id });
   res.redirect("/product/all");
 })
