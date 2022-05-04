@@ -104,25 +104,28 @@ app.post("/product/post", async (req, res) => {
   const productTitle = req.body.newTitle
   const productImage = req.body.newImage
   const productDescription = req.body.newDescription
+  const {instagram , facebook} = req.body;
+  if(facebook=="on")
+  {
+    FB.api(
+      '/4989596207793558/feed',
+      'POST',
+      { "message": "parfum de cocalar" },
+      function (res) {
+        if (!res || res.error) {
+          console.log(!res ? 'error occurred' : res.error);
+          return;
+        }
+      }
+    );
+
+  }
   const newProduct = new productModel({
     image: productImage,
     title: productTitle,
     description: productDescription
   })
   await newProduct.save()
-
-  FB.api(
-    '/4989596207793558/feed',
-    'POST',
-    { "message": "parfum de cocalar" },
-    function (res) {
-      if (!res || res.error) {
-        console.log(!res ? 'error occurred' : res.error);
-        return;
-      }
-    }
-  );
-
   res.redirect("/product/all")
 })
 
