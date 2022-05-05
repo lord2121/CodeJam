@@ -1,4 +1,6 @@
 <%layout('partials/boilerplate')-%>
-<h1><%=product.title%></h1>
-<p><%=product.description%></p>
-<img src="<%=product.image%>">
+<div class="container">
+    <h1 class="text-center mt-5"><%=product.title%></h1>
+    <img src="<%=product.image%>" class="img-fluid">
+    <p class="px-5"><%=product.description%></p>
+</div>
