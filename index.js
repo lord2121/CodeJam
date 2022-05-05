@@ -89,6 +89,9 @@ app.get("/", (req, res) => {
   res.render("index")
 })
 
+app.get("/contact", (req, res) => {
+  res.render("contact")
+})
 
 
 app.get("/product/all", async (req, res) => {
@@ -104,9 +107,8 @@ app.post("/product/post", async (req, res) => {
   const productTitle = req.body.newTitle
   const productImage = req.body.newImage
   const productDescription = req.body.newDescription
-  const {instagram , facebook} = req.body;
-  if(facebook=="on")
-  {
+  const { instagram, facebook } = req.body;
+  if (facebook == "on") {
     FB.api(
       '/4989596207793558/feed',
       'POST',
