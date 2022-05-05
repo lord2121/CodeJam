@@ -87,6 +87,7 @@
     color: black;
     font-size: 3rem;
     text-decoration: none;
+    font-family: 'Cabin', sans-serif;
 }
 
 .navLink::after,
@@ -130,12 +131,6 @@ input:focus::after {
 
 input:focus {
     outline: none;
-}
-
-h1 {
-    font-weight: bold;
-    color: black;
-    font-size: 5rem;
 }
 
 .text404 {
@@ -185,9 +180,19 @@ h1 {
 }
 
 .deleteButton {
-    background: grey;
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
+    border: 0;
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+}
 
+.forcedCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 30px 0;
 }

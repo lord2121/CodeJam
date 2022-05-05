@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.0",
+    "cloudinary": "^1.29.1",
     "dotenv": "^16.0.0",
     "ejs": "^3.1.6",
     "ejs-mate": "^3.0.0",
@@ -22,6 +23,7 @@
     "method-override": "^3.0.0",
     "mongoose": "^6.3.0",
     "mongoose-findorcreate": "^3.0.0",
+    "multer-storage-cloudinary": "^4.0.0",
     "passport": "^0.5.2",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth20": "^2.0.0",

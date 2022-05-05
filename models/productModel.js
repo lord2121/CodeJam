@@ -8,7 +8,7 @@ mongoose.connect('mongodb://localhost:27017/Test')
 const productSchema = new Schema({
   image: {
     type: String,
-    required: true
+    required: false
   },
   title: {
     type: String,
