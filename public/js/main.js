@@ -1,5 +1,6 @@
 let navMenu;
 let windowHeight;
+
 function start() {
     navMenu = $(".navMenu");
     navMenu.hide();
