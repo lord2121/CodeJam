@@ -11,13 +11,13 @@ p {
 h1 {
     font-size: 5rem;
     font-weight: bold;
-    color: black;
+    color: var(--color-1);
 }
 
 h2 {
     font-size: 3rem;
     font-weight: bold;
-    color: black;
+    color: var(--color-3);
 }
 
 p {
