@@ -17,7 +17,7 @@ const FB = require("fb")
 const methodOverride = require('method-override');
 
 
-FB.setAccessToken('EAAQD35p2XE0BAGTaH0oPJYxjCG1ijEaUXZCUCk7rCcGgycbEX9uxZBCgMpXfkqgGGhr7s4jZBJu3GSqS63KXupseLrj6bBm82dZCwpy11FTT2JjneA78lmc3lodi629VZAavkfZAHUMczIDg48G7rNFUgM2aaFfTZBBZCMmpOR7uKsGpPF79tGUE4FTUDSNZBMFR5ZAJVxlGx0CsgrOP6h15BrH0GxsTZCQVzHfSrFXorrXhvXWZBxyi2hkV');
+FB.setAccessToken('EAAQD35p2XE0BAJfqxYxbZCX9JnyzCxIy2ZA1gXjEMZAe9ShvmSZAw9uTtch81XIgYaylzDImcjRggzZAJO0ArGxUnyUMz5eZBNIP97fJqsjMF2sTViDyeiZBy72LFZCraU6RTdUMaP33ZB09yVJDU9zvqrVZAhMsdRJxJ0TsZA0KD30rvcAwgxWvE9O4ciRPc7sM9D5vfKTCLjhKTSZCRSq9C9qKPEknqIZA79SDepeUdbnD1kPwtVMRBdBT9');
 const app = express()
 app.engine('ejs', ejsMate);
 app.set("view engine", "ejs")
@@ -108,12 +108,23 @@ app.post("/product/post", async (req, res) => {
   const productImage = req.body.newImage
   const productDescription = req.body.newDescription
   const { instagram, facebook } = req.body;
+  
+
+  const newProduct = new productModel({
+    image: productImage,
+    title: productTitle,
+    description: productDescription
+  })
+  const id = newProduct._id
+  await newProduct.save()
+
+  let productUrl = process.env.HOST + "/product/" + id;
   if (facebook == "on") {
     FB.api(
-      '/4989596207793558/feed',
+      '/569175147961571/photos',
       'POST',
-      { "message": "parfum de cocalar" },
-      function (res) {
+      {"message": productDescription + '\n' + productUrl,"url":"https://www.gorjonline.ro/wp-content/uploads/2020/03/luna.jpg"},
+      function(res) {
         if (!res || res.error) {
           console.log(!res ? 'error occurred' : res.error);
           return;
@@ -122,20 +133,43 @@ app.post("/product/post", async (req, res) => {
     );
 
   }
-  const newProduct = new productModel({
-    image: productImage,
-    title: productTitle,
-    description: productDescription
-  })
-  await newProduct.save()
+
+  if(instagram== "on")
+  {
+    FB.api(
+      '/17841453033655742/media',
+      'POST',
+      {"image_url":productImage},
+      function(res) {
+        if (!res || res.error) {
+          console.log(!res ? 'error occurred' : res.error);
+          return;
+        }
+        else{
+          const containerId = res.id
+          FB.api(
+            '/17841453033655742/media_publish',
+            'POST',
+            {"creation_id":containerId},
+            function(response) {
+              if (!res || res.error) {
+                console.log(!res ? 'error occurred' : res.error);
+                return;
+              }
+            }
+          );
+        }
+      }
+    );
+  }
+
   res.redirect("/product/all")
 })
 
-app.get("/product/:id", (req, res) => {
+app.get("/product/:id", async (req, res) => {
   id = req.params.id;
-  productModel.findById(id, function (err, product) {
-    res.render('../views/product/product', { product });
-  })
+  const product = await productModel.findById(id);
+  res.render('../views/product/product', { product });
 })
 
 app.delete("/product/:id", async (req, res) => {
