@@ -1,6 +1,48 @@
 <%layout('partials/boilerplate')-%>
-<div class="container">
-    <h1 class="text-center mt-5"><%=product.title%></h1>
-    <img src="<%=product.image%>" class="img-fluid">
-    <p class="px-5"><%=product.description%></p>
-</div>
+<section class="d-flex align-items-center" style="padding-top: 200px;">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+        <div class="row">
+            <div class="col-lg-8">
+                <%if(product.title){%><h1><span><%=product.title%></span></h1><%}%>
+                <%if(product.description){%><p><%=product.description%></p><%}%>
+            </div>
+            <div class="col-lg-4 d-flex align-items-center justify-content-center position-relative" data-aos="zoom-in"
+                data-aos-delay="200">
+                <%if(product.image){%><img src="<%=product.image%>" class="img-fluid" style="min-width: 500px"><%}%>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ======= Testimonials Section ======= -->
+<section id="testimonials" class="testimonials section-bg">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <p>Comentarii</p>
+        </div>
+
+        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="testimonial-item">
+                        <p>
+                            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam nobis corrupti est recusandae,
+                            dicta neque nisi corporis minus vitae sapiente magni repellendus voluptatem maiores quisquam
+                            quos dignissimos molestiae possimus veritatis!
+                            Non iste iure nihil minus magni architecto voluptatibus quas, laborum provident tenetur
+                            amet? Nobis, maiores. Quis dolore vel nostrum eligendi, assumenda numquam porro minima ipsam
+                            suscipit fugit voluptate temporibus culpa?
+                            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                        </p>
+                        <h3>Nume Prenume</h3>
+                    </div>
+                </div><!-- End testimonial item -->
+                <div class="swiper-pagination"></div>
+            </div>
+
+        </div>
+</section><!-- End Testimonials Section -->

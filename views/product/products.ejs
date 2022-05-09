@@ -1,32 +1,39 @@
 <%layout('partials/boilerplate')-%>
 
-<div class="products-container swiper">
-    <div class="swiper-wrapper" style="width: 100%;height:100%;">
-        <% newProductItem.forEach(function(item){ %>
-        <div class="card swiper-slide">
-            <a href="/product/<%= item._id %>" class="card-link">
-                <img class="card-img-top" src=<%= item.image %>>
-                <div class="card-body">
-                    <h5 class="card-title"> <%= item.title %> </h5>
-                </div>
-            </a>
-            <%if(currentUser){%>
-            <form method="POST" action="/product/<%= item._id %>?_method=DELETE">
-                <button class="deleteButton">X</button>
-            </form>
-            <%}%>
+<!-- ======= Why Us Section ======= -->
+<section id="why-us" class="why-us" style="padding-top: 200px;">
+    <div class="container swiper mySwiper" data-aos="fade-up">
+        <div class="section-title">
+            <h2>De ce noi?</h2>
+            <p>Produsele noastre</p>
         </div>
-            
-        <% }) %>
-            <%if(currentUser){%>
-            <div class="card swiper-slide">
-                <a href="/product/post" class="card-link">
-                    <div class="card-body">
-                        <h5 class="card-title"> Add new Product </h5>
-                    </div>
+        <div class="swiper-wrapper">
+            <% newProductItem.forEach(product => {%>
+            <div class="swiper-slide">
+                <%if(product._id){%><a href="/product/<%=product._id%>"><%}%>
+                    <div class="box" data-aos="zoom-in" data-aos-delay="100">
+                        <%if(product.image){%><img src="<%=product.image%>" class="img-fluid" alt=""><%}%>
+                        <%if(product.title){%><h4><%=product.title%></h4><%}%>
+                        <form action="/product/<%=product._id%>?_method=DELETE" method="POST" class="float-end"><button
+                        href="/product/post" class="book-a-table-btn scrollto d-none d-lg-flex">Sterge produsul</button>
+                    </form>
+            </div>
+            </a>
+        </div>
+        <%});%>
+        <div class="swiper-slide">
+            <div class="d-flex justify-content-center align-items-center" style="height: 500px;">
+                <a href="/product/post">
+                    <h1>
+                        <i class="bi bi-plus-circle"></i>
+                    </h1>
                 </a>
             </div>
-            <%}%>
         </div>
-        
     </div>
+    </div>
+</section><!-- End Why Us Section -->
+
+<script>
+
+</script>

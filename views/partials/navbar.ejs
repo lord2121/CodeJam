@@ -1,40 +1,32 @@
-<div class="navigation">
-    <div class="navButton" onclick="toggleNav()">
-        <button class="navMenuButton"
-            onclick="this.classList.toggle('opened');this.setAttribute('aria-expanded', this.classList.contains('opened'))"
-            aria-label="Main Menu">
-            <svg class="buttonSvg" viewBox="0 0 100 100">
-                <path class="navLine navLine1"
-                    d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
-                <path class="navLine navLine2" d="M 20,50 H 80" />
-                <path class="navLine navLine3"
-                    d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
-            </svg>
-        </button>
-    </div>
-    <div class="navMenu">
-        <div class="container my-5 py-5">
-            <ul>
-                <li class="navLink m-3">
-                    <a href="/">About Us</a>
-                </li>
-                <li class="navLink m-3">
-                    <a href="/product/all">Our Products</a>
-                </li>
-                <%if(currentUser){%>
-                <li class="navLink m-3">
-                    <a href="/product/post">Create a product post</a>
-                </li>
-                <%}%>
-                <li class="navLink m-3">
-                    <a href="/contact">Contact</a>
-                </li>
-                <%if(!currentUser){%>
-                <li class="navLink m-3">
-                    <a href="/auth/facebook">Login</a>
-                </li>
-                <%}%>
-            </ul>
+<!-- ======= Top Bar ======= -->
+<div id="topbar" class="d-flex align-items-center fixed-top">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+
+        <div class="contact-info d-flex align-items-center">
+            <i class="bi bi-phone d-flex align-items-center"><span>+40 726 381 934</span></i>
+            <i class="bi bi-envelope d-flex align-items-center ms-4"><span>company@example.com</span></i>
         </div>
     </div>
 </div>
+
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top d-flex align-items-cente">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+
+        <h1 class="logo me-auto me-lg-0"><a href="/">Companie</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+                <li><a class="nav-link scrollto" href="/">Despre noi</a></li>
+                <li><a class="nav-link scrollto" href="/product/all">Produsele noastre</a></li>
+                <li><a class="nav-link scrollto" href="/contact">Contact</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+        <%if(currentUser) { %><a href="/product/post" class="book-a-table-btn scrollto d-none d-lg-flex">Posteaza un
+            produs</a><%}%>
+
+    </div>
+</header><!-- End Header -->

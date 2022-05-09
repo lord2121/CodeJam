@@ -108,7 +108,7 @@ app.post("/product/post", async (req, res) => {
   const productImage = req.body.newImage
   const productDescription = req.body.newDescription
   const { instagram, facebook } = req.body;
-  
+
 
   const newProduct = new productModel({
     image: productImage,
@@ -123,8 +123,8 @@ app.post("/product/post", async (req, res) => {
     FB.api(
       '/569175147961571/photos',
       'POST',
-      {"message": productDescription + '\n' + productUrl,"url":"https://www.gorjonline.ro/wp-content/uploads/2020/03/luna.jpg"},
-      function(res) {
+      { "message": productDescription + '\n' + productUrl, "url": "https://www.gorjonline.ro/wp-content/uploads/2020/03/luna.jpg" },
+      function (res) {
         if (!res || res.error) {
           console.log(!res ? 'error occurred' : res.error);
           return;
@@ -134,24 +134,23 @@ app.post("/product/post", async (req, res) => {
 
   }
 
-  if(instagram== "on")
-  {
+  if (instagram == "on") {
     FB.api(
       '/17841453033655742/media',
       'POST',
-      {"image_url":productImage},
-      function(res) {
+      { "image_url": productImage },
+      function (res) {
         if (!res || res.error) {
           console.log(!res ? 'error occurred' : res.error);
           return;
         }
-        else{
+        else {
           const containerId = res.id
           FB.api(
             '/17841453033655742/media_publish',
             'POST',
-            {"creation_id":containerId},
-            function(response) {
+            { "creation_id": containerId },
+            function (response) {
               if (!res || res.error) {
                 console.log(!res ? 'error occurred' : res.error);
                 return;
