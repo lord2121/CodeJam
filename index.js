@@ -17,7 +17,7 @@ const FB = require("fb")
 const methodOverride = require('method-override');
 
 
-FB.setAccessToken('EAAQD35p2XE0BAJfqxYxbZCX9JnyzCxIy2ZA1gXjEMZAe9ShvmSZAw9uTtch81XIgYaylzDImcjRggzZAJO0ArGxUnyUMz5eZBNIP97fJqsjMF2sTViDyeiZBy72LFZCraU6RTdUMaP33ZB09yVJDU9zvqrVZAhMsdRJxJ0TsZA0KD30rvcAwgxWvE9O4ciRPc7sM9D5vfKTCLjhKTSZCRSq9C9qKPEknqIZA79SDepeUdbnD1kPwtVMRBdBT9');
+FB.setAccessToken('EAAQD35p2XE0BAKixjGLumvPVt3FEolUvac13ntLXr9hh2KoLcX0Pok3t2e8O4WMfvh2JlqkC9HcZAa3Mt4HeC0LLpTXVoZBT8UpIwAmNZCh7OgwBPZBd3ZBuR3DcR4SXN3HycaJoDlM0NSPa2ksm4ZB9wOC9YL8BGWabI6RZBA1rUFcgzj2NWP2CwCjZAp5CCiO1UwZAVmxz09pNEn6zxpmH609zVOFm574lElUwUhBt4P1JT0Cu6ZBAAz1SJBhSRFRyoZD');
 const app = express()
 app.engine('ejs', ejsMate);
 app.set("view engine", "ejs")
@@ -146,16 +146,25 @@ app.post("/product/post", async (req, res) => {
         }
         else {
           const containerId = res.id
+          
           FB.api(
             '/17841453033655742/media_publish',
             'POST',
             { "creation_id": containerId },
-            function (response) {
+            async function (response) {
               if (!res || res.error) {
                 console.log(!res ? 'error occurred' : res.error);
                 return;
               }
-            }
+              else{
+                const mediaId = response.id //Acesta este id-ul postarii de pe instagram
+                await productModel.findByIdAndUpdate(id, 
+                  {instagramId:mediaId}, function (err, docs) {
+                  if (err){
+                      console.log(err)
+                  }
+              }).clone();
+            }}
           );
         }
       }
@@ -168,7 +177,34 @@ app.post("/product/post", async (req, res) => {
 app.get("/product/:id", async (req, res) => {
   id = req.params.id;
   const product = await productModel.findById(id);
-  res.render('../views/product/product', { product });
+  const igID = product.instagramId;
+  let comentarii = []
+  if(igID)
+  {
+   const comentariiInstagram = []
+    FB.api(
+      '/' + igID + '/comments',
+      'GET',
+      {},
+      function(response) {
+        if (!response || res.response) {
+          console.log(!response ? 'error occurred' : response.error);
+          return;
+        }
+        else{
+          Object.keys(response).forEach(function (key){
+            response[key].forEach(function (a){
+              comentariiInstagram.push(a.text)
+            })
+        });
+        }
+
+        res.render('../views/product/product', { product , comments: comentariiInstagram});
+      }
+    );
+    
+  }
+  //res.render('../views/product/product', { product});
 })
 
 app.delete("/product/:id", async (req, res) => {

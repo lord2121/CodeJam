@@ -17,7 +17,11 @@ const productSchema = new Schema({
   description: {
     type: String,
     required: true
+  },
+  instagramId: {
+    type: String
   }
+
 });
 
 const Product = mongoose.model('Product', productSchema);
