@@ -17,7 +17,7 @@ const FB = require("fb")
 const methodOverride = require('method-override');
 
 
-FB.setAccessToken('EAAQD35p2XE0BAI5hIOCZCARnTAT8T7ZAuZCtiVAX1PNdebhgznLLLSuMhBANhe4CweZB0iMk12KqvtBrZAeZB7rPEGpv0PgWH9zCIPpjKSR9swwRTdHxWunYpLE9l4cbJvTnbGy3EgbH0rRy3i0CIALfkoH65CUKT8OZAXZCtq8xMNsKeuzV3ZB7TyHI0C9HpdSa3yxpmXZCIfKrrxriOzlNEVqZCY8ZBH1HEbFvyikCnDIUcqWA52l8tVaX4pYLBuNJnWsZD');
+FB.setAccessToken('EAAQD35p2XE0BACQZB87BCEGySLWABCxtCyP6MZAGccHZCZAvbNmS0TwjAGH55TwZA2ZC7rSIowgcMJYuHs9k7SJFSuPvkHzw98ZCJUu8gG3fGPVdNw0YbLDkYz6JDDpEBElt9kD6EPecF53IB9uk3tQg5WJqB4OrJQ0kdUZBTwtT0XIRrqZASJZBCHZC3Wn2qYwJNZBPgsLdAMeHC1mSblPZAgWdoJ1jrzpLo34infn6NgFJzqjOeajevPrCpdpVHNlBm928ZD');
 const app = express()
 app.engine('ejs', ejsMate);
 app.set("view engine", "ejs")
