@@ -12,24 +12,36 @@
             <div class="swiper-slide">
                 <%if(product._id){%><a href="/product/<%=product._id%>"><%}%>
                     <div class="box" data-aos="zoom-in" data-aos-delay="100">
-                        <%if(product.image){%><img src="<%=product.image%>" class="img-fluid" alt=""><%}%>
+                        <%if(product.image){%><img src="<%=product.image%>" style="width: 500px; overflow: hidden;"
+                        class="img-fluid" alt=""><%}%>
                         <%if(product.title){%><h4><%=product.title%></h4><%}%>
-                        <form action="/product/<%=product._id%>?_method=DELETE" method="POST" class="float-end"><button
-                        href="/product/post" class="book-a-table-btn scrollto d-none d-lg-flex">Sterge produsul</button>
+                        <div class="social-links mt-3">
+                            <a href="https://www.facebook.com/groups/569175147961571" class="facebook"
+                                target="_blank"><i class="bx bxl-facebook"></i></a>
+                            <a href="https://www.instagram.com/codejam_test/" class="instagram" target="_blank"><i
+                                    class="bx bxl-instagram"></i></a>
+                        </div>
+                    <%if(currentUser) { %>
+                    <form action="/product/<%=product._id%>?_method=DELETE" method="POST" class="float-end"><button
+                            href="/product/post" class="book-a-table-btn scrollto d-none d-lg-flex">Sterge
+                            produsul</button>
                     </form>
+                    <%}%>
             </div>
             </a>
         </div>
         <%});%>
-        <div class="swiper-slide">
-            <div class="d-flex justify-content-center align-items-center" style="height: 500px;">
-                <a href="/product/post">
-                    <h1>
-                        <i class="bi bi-plus-circle"></i>
-                    </h1>
-                </a>
-            </div>
-        </div>
+                    <%if(currentUser) { %>
+                    <div class="swiper-slide">
+                        <div class="d-flex justify-content-center align-items-center" style="height: 500px;">
+                            <a href="/product/post">
+                                <h1>
+                                    <i class="bi bi-plus-circle"></i>
+                                </h1>
+                            </a>
+                        </div>
+                    </div>
+                    <%}%>
     </div>
     </div>
 </section><!-- End Why Us Section -->

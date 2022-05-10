@@ -5,14 +5,17 @@ const findOrCreate = require('mongoose-findorcreate');
 
 mongoose.connect('mongodb://localhost:27017/Test')
 
+
 const userSchema = new Schema({
+  email: String,
+  password: String,
   facebookId: String
 });
 
 userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
+
+
 const User = mongoose.model('User', userSchema);
-
-
 
 module.exports = User
