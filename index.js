@@ -20,6 +20,9 @@ const FB = require("fb");
 const methodOverride = require('method-override');
 const { isLoggedIn } = require("./middleware.js");
 const app = express();
+const MongoDbStore = require('connect-mongo');
+const dbURL = process.env.DATABASE_URL || 'mongodb://localhost:27017/Test';
+
 
 app.engine('ejs', ejsMate);
 app.set("view engine", "ejs")
@@ -28,7 +31,19 @@ app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
+const store = MongoDbStore.create({
+  mongoUrl: dbURL,
+  secret: process.env.SECRET,
+  touchAfter: 24 * 3600
+});
+
+store.on("error", function (e) {
+  console.log("Session error:\n", e);
+});
+
+
 app.use(session({
+  store,
   secret: process.env.SECRET || "Micul nostru secret",
   resave: false,
   saveUninitialized: false
