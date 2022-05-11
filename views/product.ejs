@@ -1,0 +1,51 @@
+<%layout('partials/boilerplate')-%>
+<section class="d-flex align-items-center" style="padding-top: 200px;">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+        <div class="row">
+            <div class="col-lg-8">
+                <%if(product.title){%><h1><span><%=product.title%></span></h1><%}%>
+                <%if(product.description){%><p><%=product.description%></p><%}%>
+            </div>
+            <div class="col-lg-4 d-flex align-items-center justify-content-center position-relative overflow-hidden" data-aos="zoom-in"
+                data-aos-delay="200">
+                <%if(product.image){%><img src="<%=product.image%>" class="img-fluid float-end"
+                    style="min-width: 400px"><%}%>
+            </div>
+            <div class="social-links mt-3" style="font-size: 3rem;">
+                <a href="https://www.facebook.com/groups/569175147961571" class="facebook" target="_blank"><i
+                        class="bx bxl-facebook"></i></a>
+                <a href="https://www.instagram.com/codejam_test/" class="instagram" target="_blank"><i
+                        class="bx bxl-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+        <%if(comments.length > 2) { %>
+                <section id="testimonials" class="testimonials section-bg">
+                    <div class="container" data-aos="fade-up">
+
+                        <div class="section-title">
+                            <p>Comentarii</p>
+                        </div>
+
+
+                        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+                            <div class="swiper-wrapper">
+                                <%comments.forEach(comment => {%>
+                                <div class="swiper-slide">
+                                    <div class="testimonial-item">
+                                        <p>
+                                            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                            <%=comment%>
+                                            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                        </p>
+                                    </div>
+                                </div><!-- End testimonial item -->
+                                <%});%>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+
+                    </div>
+                </section><!-- End Testimonials Section -->
+                <%}%>

@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require("express");
 const ejs = require("ejs");
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const mongoose = require("mongoose");
 const session = require("express-session");
 const ejsMate = require("ejs-mate");
@@ -20,13 +20,10 @@ const FB = require("fb");
 const methodOverride = require('method-override');
 const { isLoggedIn } = require("./middleware.js");
 const app = express();
+const MongoDbStore = require('connect-mongo');
+const dbURL = process.env.DATABASE_URL || 'mongodb://localhost:27017/Test';
 
-<<<<<<< HEAD
 
-FB.setAccessToken('EAAQD35p2XE0BACQZB87BCEGySLWABCxtCyP6MZAGccHZCZAvbNmS0TwjAGH55TwZA2ZC7rSIowgcMJYuHs9k7SJFSuPvkHzw98ZCJUu8gG3fGPVdNw0YbLDkYz6JDDpEBElt9kD6EPecF53IB9uk3tQg5WJqB4OrJQ0kdUZBTwtT0XIRrqZASJZBCHZC3Wn2qYwJNZBPgsLdAMeHC1mSblPZAgWdoJ1jrzpLo34infn6NgFJzqjOeajevPrCpdpVHNlBm928ZD');
-const app = express()
-=======
->>>>>>> 3e5d504c52fed6318956e3091b29cf49afe75a4b
 app.engine('ejs', ejsMate);
 app.set("view engine", "ejs")
 app.use(express.static("public"))
@@ -34,7 +31,19 @@ app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
+const store = MongoDbStore.create({
+  mongoUrl: dbURL,
+  secret: process.env.SECRET,
+  touchAfter: 24 * 3600
+});
+
+store.on("error", function (e) {
+  console.log("Session error:\n", e);
+});
+
+
 app.use(session({
+  store,
   secret: process.env.SECRET || "Micul nostru secret",
   resave: false,
   saveUninitialized: false
@@ -60,7 +69,7 @@ app.use((req, res, next) => {
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: "http://localhost:3000/auth/facebook/secrets"
+  callbackURL: process.env.HOST + "/auth/facebook/secrets"
 },
   function (accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
