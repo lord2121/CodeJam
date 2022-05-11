@@ -69,7 +69,7 @@ app.use((req, res, next) => {
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: process.env.HOST + "/auth/facebook/secrets"
+  callbackURL: "http://" + process.env.HOST + "/auth/facebook/secrets"
 },
   function (accessToken, refreshToken, profile, cb) {
     User.findOrCreate({
