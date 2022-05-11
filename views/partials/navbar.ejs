@@ -23,13 +23,13 @@
                 <li><a class="nav-link scrollto" href="/product/all">Produsele noastre</a></li>
                 <li><a class="nav-link scrollto" href="/contact">Contact</a></li>
                 <%if(!currentUser) { %><li><a class="nav-link scrollto" href="/auth/facebook">Login</a></li> <%}%>
-                <%if(currentUser) { %><form action="/logout" method="post"><button
-                        class="nav-link scrollto">Logout</button></form><%}%>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
         <%if(currentUser) { %><a href="/product/post" class="book-a-table-btn scrollto d-none d-lg-flex">Posteaza un
-                    produs</a><%}%>
+                    produs</a><%}%><%if(currentUser) { %><form action="/logout" method="post"><button
+                        class="nav-link scrollto" style="background: none; border: none; color: white;">Logout</button>
+                </form><%}%>
 
     </div>
 </header><!-- End Header -->
