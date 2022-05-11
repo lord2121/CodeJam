@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.get('/auth/facebook', passport.authenticate('facebook'));
 
-router.get('/auth/facebook/secrets', passport.authenticate('facebook', { failureRedirect: '/login', successRedirect: '/' }));
+router.get('/auth/facebook/secrets', passport.authenticate('facebook', { failureRedirect: '/', successRedirect: '/' }));
 
 module.exports = router;
