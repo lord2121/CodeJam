@@ -16,7 +16,7 @@ module.exports.productForm = (req, res) => {
 
 module.exports.productFormPost = async (req, res) => {
     const productTitle = req.body.newTitle
-    const productImage = req.body.newImage
+    const productImage = req.file.path;
     const productDescription = req.body.newDescription
     const {
         instagram,
@@ -38,7 +38,7 @@ module.exports.productFormPost = async (req, res) => {
             '/569175147961571/photos',
             'POST', {
             "message": productDescription + '\n' + productUrl,
-            "url": "https://www.gorjonline.ro/wp-content/uploads/2020/03/luna.jpg"
+            "url": productImage
         },
             async function (res) {
                 if (!res || res.error) {
