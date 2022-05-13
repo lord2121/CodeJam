@@ -4,12 +4,14 @@
     <div class="container" data-aos="fade-up">
         <%if(currentUser) { %>
         <div class="section-title text-center">
-            <p>Add a product</p>
+            <p>Update product <%=product.title%></p>
         </div>
-        <form action="/product/post" class="container my-5 w-xl-50 php-email-form needs-validation" method="POST"
-            enctype="multipart/form-data" novalidate>
+        <form action="/product/<%=product._id%>/update?_method=PUT"
+            class="container my-5 w-xl-50 php-email-form needs-validation" method="POST" enctype="multipart/form-data"
+            novalidate>
             <div class="mb-3">
-                <input type="text" class="form-control" name="newTitle" placeholder="Product Title" required>
+                <input type="text" class="form-control" name="newTitle" placeholder="Product Title"
+                    value="<%=product.title%>" required>
                 <div class="invalid-feedback">
                     Invalid Title.
                 </div>
@@ -22,19 +24,19 @@
             </div>
             <div class="mb-3">
                 <textarea class="form-control" rows="3" name="newDescription" placeholder="Product description"
-                    required></textarea>
+                    required><%=product.description%></textarea>
                 <div class="invalid-feedback">
                     Invalid description
                 </div>
             </div>
             <div class="mb-3">
                 <input type="checkbox" id="instagramCheckbox" name="instagram" class="form-check-input"
-                    style="width: 20px;height: 20px;">
+                    style="width: 20px;height: 20px;" value="<%=product.instagramId%>">
                 <label for="instagramCheckbox">Post on Instagram</label>
             </div>
             <div class="mb-3">
                 <input type="checkbox" id="facebookCheckbox" name="facebook" class="form-check-input"
-                    style="width: 20px;height: 20px;">
+                    style="width: 20px;height: 20px;" <%=product.facebookId%>>
                 <label for="facebookCheckbox">Post on Facebook</label>
             </div>
             <button type="submit" class="btn btn-dark float-end">Make post</button>
