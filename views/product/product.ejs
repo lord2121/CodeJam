@@ -11,16 +11,28 @@
                 <%if(product.image){%><img src="<%=product.image%>" class="img-fluid float-end"
                     style="min-width: 400px"><%}%>
             </div>
-            <div class="social-links mt-3" style="font-size: 3rem;">
-                <a href="https://www.facebook.com/groups/569175147961571" class="facebook" target="_blank"><i
-                        class="bx bxl-facebook"></i></a>
-                <a href="https://www.instagram.com/codejam_test/" class="instagram" target="_blank"><i
-                        class="bx bxl-instagram"></i></a>
+            <%if(currentUser) { %>
+                <div class="d-flex">
+                    <form action="/product/<%=product._id%>?_method=DELETE" method="POST" class="float-end"><button
+                            href="/product/post" class="book-a-table-btn scrollto d-none d-lg-flex">Sterge
+                            produsul</button>
+                    </form>
+                    <a href="/product/<%=product._id%>/update" class="btn book-a-table-btn"
+                        style="display: block;">Editeaza
+                        produsul</a>
+                </div>
+
+                <%}%>
+            <div class=" social-links mt-3" style="font-size: 3rem;">
+                    <a href="https://www.facebook.com/groups/569175147961571" class="facebook" target="_blank"><i
+                            class="bx bxl-facebook"></i></a>
+                    <a href="https://www.instagram.com/codejam_test/" class="instagram" target="_blank"><i
+                            class="bx bxl-instagram"></i></a>
             </div>
         </div>
     </div>
 </section>
-        <%if(comments.length > 2) { %>
+<%if(comments.length > 0){%>
                 <section id="testimonials" class="testimonials section-bg">
                     <div class="container" data-aos="fade-up">
 
@@ -36,16 +48,40 @@
                                     <div class="testimonial-item">
                                         <p>
                                             <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                            <%=comment%>
+                                            <%=comment.text%>
                                             <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                         </p>
-                                    </div>
-                                </div><!-- End testimonial item -->
-                                <%});%>
-                            </div>
-                            <div class="swiper-pagination"></div>
-                        </div>
-
+                                        <%if(currentUser && comment._id) { %>
+                                        <form action="/product/<%=product._id%>/<%=comment._id%>?_method=DELETE"
+                                            method="POST" class="float-start py-5"><button href="/product/post"
+                                                class="book-a-table-btn scrollto d-none d-lg-flex">Sterge
+                                                comentariul</button>
+                                        </form>
+                                        <%}%>
                     </div>
+                </div><!-- End testimonial item -->
+                <%});%>
+                                    </div>
+                                    <div class="swiper-pagination"></div>
+                                </div>
+
+                            </div>
                 </section><!-- End Testimonials Section -->
                 <%}%>
+
+                <section id="book-a-table" class="book-a-table">
+                    <div class="container" data-aos="fade-up">
+                        <form action="/product/<%=product._id%>/postComment" class="container my-5 w-xl-50
+                php-email-form
+                needs-validation" method="POST" novalidate>
+                <div class="mb-3">
+                    <textarea class="form-control" rows="3" name="comment" placeholder="Adaugati un comentariu"
+                        required></textarea>
+                    <div class="invalid-feedback">
+                        Comentariul trebuie sa contina minim 5 caractere.
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-dark float-end">Postati comentariu</button>
+                </form>
+            </div>
+</section>

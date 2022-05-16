@@ -7,7 +7,7 @@ const dbURL = process.env.DATABASE_URL || 'mongodb://localhost:27017/Test';
 
 mongoose.connect(dbURL);
 const db = mongoose.connection;
-db.on("open", () => { console.log("Database connected!") });
+db.on("open", () => { console.log("Product model") });
 
 const productSchema = new Schema({
   image: {
@@ -27,8 +27,13 @@ const productSchema = new Schema({
   },
   facebookId: {
     type: String
-  }
-
+  },
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Comment'
+    }
+  ]
 });
 
 const Product = mongoose.model('Product', productSchema);

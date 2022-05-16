@@ -8,6 +8,7 @@ const ejsMate = require("ejs-mate");
 const facebookRoutes = require('./routes/facebookRoutes.js');
 const productRoutes = require('./routes/productRoutes.js');
 const commonRoutes = require('./routes/commonRoutes.js');
+const commentRoutes = require('./routes/commentRoutes.js');
 const productModel = require('./models/productModel.js');
 const User = require('./models/usersModel.js');
 const passport = require("passport")
@@ -83,6 +84,7 @@ passport.use(new FacebookStrategy({
 FB.setAccessToken(process.env.FB_ACCESS_TOKEN);
 app.use("/", facebookRoutes);
 app.use("/", commonRoutes);
+app.use("/", commentRoutes);
 app.use("/", productRoutes);
 
 
