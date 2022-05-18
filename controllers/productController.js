@@ -1,5 +1,7 @@
 const productModel = require('../models/productModel.js');
 const FB = require("fb");
+const fetch = require("node-fetch");
+
 
 module.exports.getProducts = async (req, res) => {
     const foundItems = await productModel.find({}).sort({
@@ -15,9 +17,18 @@ module.exports.productForm = (req, res) => {
 };
 
 module.exports.updateProduct = async (req, res) => {
-    const { newTitle, newDescription } = req.body;
-    const { id } = req.params;
-    const product = await productModel.findByIdAndUpdate(id, { title: newTitle, image: req.file.path || "https://media.mixbook.com/images/templates/97_1_0_m.jpg", description: newDescription });
+    const {
+        newTitle,
+        newDescription
+    } = req.body;
+    const {
+        id
+    } = req.params;
+    const product = await productModel.findByIdAndUpdate(id, {
+        title: newTitle,
+        image: req.file.path || "https://media.mixbook.com/images/templates/97_1_0_m.jpg",
+        description: newDescription
+    });
     await product.save();
 
     res.redirect(`/product/${id}`);
@@ -26,7 +37,9 @@ module.exports.updateProduct = async (req, res) => {
 module.exports.updateForm = async (req, res) => {
     const product = await productModel.findById(req.params.id);
     if (product) {
-        res.render("../views/product/updateForm", { product });
+        res.render("../views/product/updateForm", {
+            product
+        });
         return;
     }
     console.log("Product not found");
@@ -39,7 +52,8 @@ module.exports.productFormPost = async (req, res) => {
     const productDescription = req.body.newDescription
     const {
         instagram,
-        facebook
+        facebook,
+        twitter
     } = req.body;
     const newProduct = new productModel({
         image: productImage,
@@ -50,13 +64,27 @@ module.exports.productFormPost = async (req, res) => {
     await newProduct.save();
 
     let productUrl = "https://evening-tor-47612.herokuapp.com/" + "/product/" + id;
+
+    if (twitter == "on") {
+        fetch('https://api.twitter.com/2/tweets', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': 'Bearer ' + process.env.TWITTER_ACCESS_TOKEN
+            },
+            body: JSON.stringify({
+                'text': productDescription + '\n' + productUrl
+            })
+        });
+    }
+
     if (facebook == "on") {
         FB.api(
             '/569175147961571/photos',
             'POST', {
-            "message": productDescription + '\n' + productUrl,
-            "url": productImage
-        },
+                "message": productDescription + '\n' + productUrl,
+                "url": productImage
+            },
             async function (res) {
                 if (!res || res.error) {
                     console.log(!res ? 'error occurred' : res.error);
@@ -80,8 +108,8 @@ module.exports.productFormPost = async (req, res) => {
         FB.api(
             '/17841453033655742/media',
             'POST', {
-            "image_url": productImage
-        },
+                "image_url": productImage
+            },
             function (res) {
                 if (!res || res.error) {
                     console.log(!res ? 'error occurred' : res.error);
@@ -92,8 +120,8 @@ module.exports.productFormPost = async (req, res) => {
                     FB.api(
                         '/17841453033655742/media_publish',
                         'POST', {
-                        "creation_id": containerId
-                    },
+                            "creation_id": containerId
+                        },
                         async function (response) {
                             if (!res || res.error) {
                                 console.log(!res ? 'error occurred' : res.error);
@@ -120,7 +148,9 @@ module.exports.productFormPost = async (req, res) => {
 
 module.exports.getProduct = async (req, res) => {
     id = req.params.id;
-    const product = await productModel.findById(id).populate({ path: 'comments' });
+    const product = await productModel.findById(id).populate({
+        path: 'comments'
+    });
     const igID = product.instagramId;
     const fbID = product.facebookId;
     let comments = [];
@@ -132,7 +162,8 @@ module.exports.getProduct = async (req, res) => {
         res.render('../views/product/product', {
             product,
             comments
-        }); return;
+        });
+        return;
     }
     if (fbID && igID) {
         FB.api(
@@ -145,7 +176,10 @@ module.exports.getProduct = async (req, res) => {
                 } else {
                     Object.keys(response).forEach(key => {
                         Object.keys(response[key]).forEach(key1 => {
-                            if (response[key][key1].message) comments.push({ text: response[key][key1].message, _id: 0 })
+                            if (response[key][key1].message) comments.push({
+                                text: response[key][key1].message,
+                                _id: 0
+                            })
                         })
                     })
                     FB.api(
@@ -158,7 +192,10 @@ module.exports.getProduct = async (req, res) => {
                             } else {
                                 Object.keys(response).forEach(function (key) {
                                     response[key].forEach(function (a) {
-                                        comments.push({ text: a.text, _id: 0 });
+                                        comments.push({
+                                            text: a.text,
+                                            _id: 0
+                                        });
                                     })
                                 });
 
@@ -173,7 +210,8 @@ module.exports.getProduct = async (req, res) => {
 
                 }
             }
-        ); return;
+        );
+        return;
     }
     if (fbID) {
         FB.api(
@@ -186,7 +224,10 @@ module.exports.getProduct = async (req, res) => {
                 } else {
                     Object.keys(response).forEach(key => {
                         Object.keys(response[key]).forEach(key1 => {
-                            if (response[key][key1].message) comments.push({ text: response[key][key1].message, _id: 0 })
+                            if (response[key][key1].message) comments.push({
+                                text: response[key][key1].message,
+                                _id: 0
+                            })
                         })
                     })
                 }
@@ -196,7 +237,8 @@ module.exports.getProduct = async (req, res) => {
                     comments
                 });
             }
-        ); return;
+        );
+        return;
     }
     FB.api(
         '/' + igID + '/comments',
@@ -208,7 +250,10 @@ module.exports.getProduct = async (req, res) => {
             } else {
                 Object.keys(response).forEach(function (key) {
                     response[key].forEach(function (a) {
-                        comments.push({ text: a.text, _id: 0 })
+                        comments.push({
+                            text: a.text,
+                            _id: 0
+                        })
                     })
                 });
             }

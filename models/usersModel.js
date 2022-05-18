@@ -11,7 +11,8 @@ db.on("open", () => { console.log("Database connected!") });
 const userSchema = new Schema({
   email: String,
   password: String,
-  facebookId: String
+  facebookId: String,
+  twitterId : String
 });
 
 userSchema.plugin(passportLocalMongoose);

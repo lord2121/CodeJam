@@ -9,10 +9,12 @@ const facebookRoutes = require('./routes/facebookRoutes.js');
 const productRoutes = require('./routes/productRoutes.js');
 const commonRoutes = require('./routes/commonRoutes.js');
 const commentRoutes = require('./routes/commentRoutes.js');
+const twitterRoutes = require('./routes/twitterRoutes.js');
 const productModel = require('./models/productModel.js');
 const User = require('./models/usersModel.js');
 const passport = require("passport")
 const FacebookStrategy = require('passport-facebook').Strategy;
+const TwitterStrategy = require('passport-twitter').Strategy;
 const Schema = mongoose.Schema;
 const findOrCreate = require('mongoose-findorcreate');
 const passportLocalMongoose = require("passport-local-mongoose");
@@ -81,11 +83,26 @@ passport.use(new FacebookStrategy({
   }
 ));
 
+
+
+// passport.use(new TwitterStrategy({
+//   consumerKey: process.env.TWITTER_CONSUMER_KEY,
+//   consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+//   callbackURL: process.env.PROTOCOL + "://" + process.env.HOST + "/auth/twitter/secrets"
+// },
+// function(token, tokenSecret, profile, cb) {
+//   User.findOrCreate({ twitterId: profile.id }, function (err, user) {
+//     return cb(err, user);
+//   });
+// }
+// ));
+
 FB.setAccessToken(process.env.FB_ACCESS_TOKEN);
 app.use("/", facebookRoutes);
 app.use("/", commonRoutes);
 app.use("/", commentRoutes);
 app.use("/", productRoutes);
+//app.use("/", twitterRoutes);
 
 
 app.use('*', (req, res) => {

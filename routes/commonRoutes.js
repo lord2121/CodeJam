@@ -10,4 +10,9 @@ router.get("/contact", (req, res) => {
     res.render("contact")
 })
 
+// router.get("/login",(req ,res) =>{
+//     res.render("login")
+// })
+
+
 module.exports = router;
