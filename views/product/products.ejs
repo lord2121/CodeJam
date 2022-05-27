@@ -1,51 +1,32 @@
 <%layout('partials/boilerplate')-%>
 
-<!-- ======= Why Us Section ======= -->
-<section id="why-us" class="why-us" style="padding-top: 200px;">
-    <div class="container swiper mySwiper" data-aos="fade-up">
-        <div class="section-title">
-            <h2>De ce noi?</h2>
-            <p>Produsele noastre</p>
+<div class="container swiper mySwiper my-5 py-5">
+    <div class="swiper-wrapper">
+        <% newProductItem.forEach(product => {%>
+        <div class="swiper-slide">
+            <%if(product._id){%><a href="/product/<%=product._id%>" class="link-light"><%}%>
+                    <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
+                        style="background: linear-gradient(
+                            rgba(0, 0, 0, 0.5),
+                            rgba(0, 0, 0, 0.5)
+                          ), url('<%=product.image%>');">
+                <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                    <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">
+                        <%=product.title%></h2>
+                    <ul class="d-flex list-unstyled mt-auto">
+                        <li class="me-auto">
+                            <div class="social-links mt-3" style="font-size: 30px;">
+                                <a href="https://www.facebook.com/groups/569175147961571" class="facebook link-light"
+                                    target="_blank"><i class="bx bxl-facebook"></i></a>
+                                <a href="https://www.instagram.com/codejam_test/" class="instagram link-light"
+                                    target="_blank"><i class="bx bxl-instagram"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
         </div>
-        <div class="swiper-wrapper">
-            <% newProductItem.forEach(product => {%>
-            <div class="swiper-slide">
-                <%if(product._id){%><a href="/product/<%=product._id%>"><%}%>
-                    <div class="box" data-aos="zoom-in" data-aos-delay="100">
-                        <%if(product.image){%><img src="<%=product.image%>" style="width: 500px; overflow: hidden;"
-                        class="img-fluid" alt=""><%}%>
-                        <%if(product.title){%><h4><%=product.title%></h4><%}%>
-                        <div class="social-links mt-3">
-                            <a href="https://www.facebook.com/groups/569175147961571" class="facebook"
-                                target="_blank"><i class="bx bxl-facebook"></i></a>
-                            <a href="https://www.instagram.com/codejam_test/" class="instagram" target="_blank"><i
-                                    class="bx bxl-instagram"></i></a>
-                        </div>
-                    <%if(currentUser) { %>
-                    <form action="/product/<%=product._id%>?_method=DELETE" method="POST" class="float-end"><button
-                            href="/product/post" class="book-a-table-btn scrollto d-none d-lg-flex">Sterge
-                            produsul</button>
-                    </form>
-                    <%}%>
-            </div>
-            </a>
-        </div>
-        <%});%>
-                    <%if(currentUser) { %>
-                    <div class="swiper-slide">
-                        <div class="d-flex justify-content-center align-items-center" style="height: 500px;">
-                            <a href="/product/post">
-                                <h1>
-                                    <i class="bi bi-plus-circle"></i>
-                                </h1>
-                            </a>
-                        </div>
-                    </div>
-                    <%}%>
+        </a>
     </div>
-    </div>
-</section><!-- End Why Us Section -->
-
-<script>
-
-</script>
+    <%});%>
+</div>
+</div>

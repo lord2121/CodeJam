@@ -1,35 +1,22 @@
-<!-- ======= Top Bar ======= -->
-<div id="topbar" class="d-flex align-items-center fixed-top">
-    <div class="container d-flex justify-content-center justify-content-md-between">
+<header
+    class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+            <use xlink:href="#bootstrap"></use>
+        </svg>
+    </a>
 
-        <div class="contact-info d-flex align-items-center">
-            <i class="bi bi-phone d-flex align-items-center"><span>+40 726 381 934</span></i>
-            <i class="bi bi-envelope d-flex align-items-center ms-4"><span>company@example.com</span></i>
-        </div>
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a class="nav-link scrollto link-dark" href="/">Despre noi</a></li>
+        <li><a class="nav-link scrollto link-dark" href="/product/all">Produsele noastre</a></li>
+        <li><a class="nav-link scrollto link-dark" href="/contact">Contact</a></li>
+    </ul>
+
+    <div class="col-md-3 d-flex text-end">
+        <%if(!currentUser) { %><a class="btn btn-outline-success me-2" href="/auth/facebook">Login</a> <%}%>
+        <%if(currentUser) { %><a href="/product/post" class="btn btn-outline-primary me-2">Posteaza un
+            produs</a><%}%><%if(currentUser) { %><form action="/logout" method="post"><button
+                class="btn btn-outline-danger me-2">Logout</button>
+        </form><%}%>
     </div>
-</div>
-
-<!-- ======= Header ======= -->
-<header id="header" class="fixed-top d-flex align-items-cente">
-    <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
-
-        <h1 class="logo me-auto me-lg-0"><a href="/">Companie</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-        <nav id="navbar" class="navbar order-last order-lg-0">
-            <ul>
-                <li><a class="nav-link scrollto" href="/">Despre noi</a></li>
-                <li><a class="nav-link scrollto" href="/product/all">Produsele noastre</a></li>
-                <li><a class="nav-link scrollto" href="/contact">Contact</a></li>
-                <%if(!currentUser) { %><li><a class="nav-link scrollto" href="/auth/facebook">Login</a></li> <%}%>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-        <%if(currentUser) { %><a href="/product/post" class="book-a-table-btn scrollto d-none d-lg-flex">Posteaza un
-                    produs</a><%}%><%if(currentUser) { %><form action="/logout" method="post"><button
-                        class="nav-link scrollto" style="background: none; border: none; color: white;">Logout</button>
-                </form><%}%>
-
-    </div>
-</header><!-- End Header -->
+</header>

@@ -1,10 +1,10 @@
 <%layout('partials/boilerplate')-%>
 
-<section id="book-a-table" class="book-a-table" style="padding-top: 200px;">
+<section id="book-a-table" class="book-a-table py-5 my-5">
     <div class="container" data-aos="fade-up">
         <%if(currentUser) { %>
         <div class="section-title text-center">
-            <p>Add a product</p>
+            <h1>Adaugati un produs</h1>
         </div>
         <form action="/product/post" class="container my-5 w-xl-50 php-email-form needs-validation" method="POST"
             enctype="multipart/form-data" novalidate>

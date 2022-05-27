@@ -82,9 +82,9 @@ module.exports.productFormPost = async (req, res) => {
         FB.api(
             '/569175147961571/photos',
             'POST', {
-                "message": productDescription + '\n' + productUrl,
-                "url": productImage
-            },
+            "message": productDescription + '\n' + productUrl,
+            "url": productImage
+        },
             async function (res) {
                 if (!res || res.error) {
                     console.log(!res ? 'error occurred' : res.error);
@@ -108,8 +108,8 @@ module.exports.productFormPost = async (req, res) => {
         FB.api(
             '/17841453033655742/media',
             'POST', {
-                "image_url": productImage
-            },
+            "image_url": productImage
+        },
             function (res) {
                 if (!res || res.error) {
                     console.log(!res ? 'error occurred' : res.error);
@@ -120,8 +120,8 @@ module.exports.productFormPost = async (req, res) => {
                     FB.api(
                         '/17841453033655742/media_publish',
                         'POST', {
-                            "creation_id": containerId
-                        },
+                        "creation_id": containerId
+                    },
                         async function (response) {
                             if (!res || res.error) {
                                 console.log(!res ? 'error occurred' : res.error);
@@ -170,8 +170,10 @@ module.exports.getProduct = async (req, res) => {
             '/' + fbID + '/comments',
             'GET', {},
             function (response) {
-                if (!response || res.response) {
+                if (response.error || res.response) {
                     console.log(!response ? 'error occurred' : response.error);
+                    const err = response.error.message;
+                    res.render("../views/error.ejs", { err });
                     return;
                 } else {
                     Object.keys(response).forEach(key => {
@@ -186,8 +188,10 @@ module.exports.getProduct = async (req, res) => {
                         '/' + igID + '/comments',
                         'GET', {},
                         function (response) {
-                            if (!response || res.response) {
+                            if (response.error || res.response) {
                                 console.log(!response ? 'error occurred' : response.error);
+                                const err = response.error.message;
+                                res.render("../views/error.ejs", { err });
                                 return;
                             } else {
                                 Object.keys(response).forEach(function (key) {
@@ -218,8 +222,10 @@ module.exports.getProduct = async (req, res) => {
             '/' + fbID + '/comments',
             'GET', {},
             function (response) {
-                if (!response || res.response) {
+                if (response.error || res.response) {
                     console.log(!response ? 'error occurred' : response.error);
+                    const err = response.error.message;
+                    res.render("../views/error.ejs", { err });
                     return;
                 } else {
                     Object.keys(response).forEach(key => {
@@ -244,8 +250,10 @@ module.exports.getProduct = async (req, res) => {
         '/' + igID + '/comments',
         'GET', {},
         function (response) {
-            if (!response || res.response) {
+            if (response.error || res.response) {
                 console.log(!response ? 'error occurred' : response.error);
+                const err = response.error.message;
+                res.render("../views/error.ejs", { err });
                 return;
             } else {
                 Object.keys(response).forEach(function (key) {
